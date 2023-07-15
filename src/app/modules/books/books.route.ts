@@ -6,6 +6,12 @@ const router = express.Router();
 // Get a single Books
 router.get('/:id', BooksController.getSingleBooks);
 
+// post comment
+router.post('/comment/:id', BooksController.postComment);
+
+//get comment
+router.get('/comment/:id', BooksController.getComment);
+
 // Update Single Books
 router.patch('/:id', BooksController.updateSingleBooks);
 

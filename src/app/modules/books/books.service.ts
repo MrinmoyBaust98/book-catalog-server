@@ -19,15 +19,37 @@ const getSingleBooks = async (id: string): Promise<IBooks | null> => {
   return result;
 };
 
+//post comment
+const postComment = async (id: string, payload: string) => {
+  // after cheeking start update here
+  const result = await Books.findOneAndUpdate(
+    { _id: id },
+    { $push: { review: payload } }
+  );
+
+  return result;
+};
+
+// get comment
+const getComment = async (id: string) => {
+  const result = await Books.findById(id);
+  return result;
+};
+
 // update Single Books
 const updateSingleBooks = async (
   id: string,
   payload: Partial<IBooks>
 ): Promise<IBooks | null> => {
   // after cheeking start update here
-  const result = await Books.findOneAndUpdate({ _id: id }, payload, {
-    new: true,
-  });
+  const result = await Books.findOneAndUpdate(
+    { _id: id },
+    payload,
+
+    {
+      new: true,
+    }
+  );
   return result;
 };
 
@@ -41,6 +63,8 @@ export const BooksService = {
   getLandingPageBooks,
   getAllBooks,
   getSingleBooks,
+  postComment,
+  getComment,
   updateSingleBooks,
   deleteBooks,
 };
